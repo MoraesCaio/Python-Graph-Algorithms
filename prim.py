@@ -40,9 +40,11 @@ def _search_vertex_edges(edges, vertex_key, excluded_verts=[]):
     found = []
 
     for edge in edges:
+
         if vertex_key in [edge.vert_pair[0].key, edge.vert_pair[1].key]:
 
-            other_vertex_key = edge.vert_pair[edge.get_other_vertex_idx(vertex_key)].key
+            other_vertex_key = edge.get_other_vertex(vertex_key).key
+
             if other_vertex_key not in excluded_verts_keys:
                 found.append(edge)
 
@@ -65,13 +67,16 @@ def minimum_spanning_tree(input='', vertices=[], edges=[], starting_vert=0, verb
         # queue = sorted(queue, key=lambda v: v.value)
         _min_heapify(queue)
         vertex = queue.pop(0)
-        vertex.parent_key = chosen_vertices[-1].key if len(chosen_vertices) else -1
         chosen_vertices.append(vertex)
         next_edges = _search_vertex_edges(edges=edges, vertex_key=vertex.key, excluded_verts=chosen_vertices)
 
         for edge in next_edges:
+
             other_vertex = edge.get_other_vertex(vertex.key)
-            other_vertex.value = min(other_vertex.value, edge.weight)
+
+            if edge.weight < other_vertex.value:
+                other_vertex.value = edge.weight
+                other_vertex.parent_key = vertex.key
 
     if verbose:
         print('#### CHOSEN EDGES ####', *chosen_vertices, sep='\n')
