@@ -1,0 +1,47 @@
+Dijkstra example:
+	from: https://www.youtube.com/watch?v=5GT5hYzjNoo
+
+	on file: simpleDij.txt
+
+	Readable
+		edges:
+			A 8B 2C 5D
+			B 2D 13F
+			C 2D 5E
+			D 1E 6F 3G
+			E 1G
+			F 2G 3H
+			G 6H
+
+		solution:
+			Origin	Sum		Parent
+			A		0		NULL
+			C 		2		A
+			D 		4		C
+			E 		5 		D
+			B 		6		D
+			G 		6 		E
+			F 		8		G
+			H 		11		F
+
+	Formatted
+		edges:
+			8
+			8 2 5 x x x x
+			x 2 x 13 x x
+			2 5 x x x
+			1 6 3 x
+			x 1 x
+			2 3
+			6
+
+		solution:
+			Origin	Sum		Parent
+			0		0		NULL
+			2 		2		0
+			3 		4		2
+			4 		5 		3
+			1 		6		3
+			6 		6 		4
+			5 		8		6
+			7 		11		5

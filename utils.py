@@ -17,7 +17,12 @@ def _parse_file(file, verbose=True):
             line_weights = line.split()
 
             for j, weight in enumerate(line_weights):
-                edges.append(Edge(int(weight), vertices[i], vertices[i + j + 1]))
+                try:
+                    value = int(weight)
+                except ValueError as e:
+                    pass
+                else:
+                    edges.append(Edge(value, vertices[i], vertices[i + j + 1]))
 
     print('\n#### EDGES ####', *edges, sep='\n')
 

@@ -51,7 +51,7 @@ def _search_vertex_edges(edges, vertex_key, excluded_verts=[]):
     return found
 
 
-def minimum_spanning_tree(input='', vertices=[], edges=[], starting_vert=0, verbose=True):
+def shortest_path(input='', vertices=[], edges=[], starting_vert=0, verbose=True):
 
     if input != '':
         vertices, edges = _parse_file(input, verbose)
@@ -72,11 +72,12 @@ def minimum_spanning_tree(input='', vertices=[], edges=[], starting_vert=0, verb
 
         for edge in next_edges:
 
+            path_sum = vertex.value + edge.weight
             other_vertex = edge.get_other_vertex(vertex.key)
 
-            if edge.weight < other_vertex.value:
+            if path_sum < other_vertex.value:
                 other_vertex.parent_key = vertex.key
-                other_vertex.value = edge.weight
+                other_vertex.value = path_sum
 
     if verbose:
         print('#### CHOSEN EDGES ####', *chosen_vertices, sep='\n')
