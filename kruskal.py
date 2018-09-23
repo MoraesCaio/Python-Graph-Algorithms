@@ -1,12 +1,34 @@
-from utils import _parse_file
+"""Python Kruskal's algorithm implementation. Constructs a minimum spanning tree
+ from a source vertex (node). The sum of the MST edges values are the
+ minimum possible.
+
+Dev: Caio Moraes
+GitHub: MoraesCaio
+Email: caiomoraes.cesar@gmail.com
+"""
+from utils import parse_file
 
 
-def minimum_spanning_tree(input='', vertices=[], edges=[], verbose=True):
+def minimum_spanning_tree(input='', starting_vert=0, verbose=True):
+    """Parse the input file (utils.parse_file) and runs the algorithm using
+     the edges and the vertices obtained from parsing. Returns the edges list
+     of a minimum spanning tree (there may be multiples MST).
 
-    if input != '':
-        vertices, edges = _parse_file(input, verbose)
-    elif vertices == [] or edges == []:
-        raise ValueError('Missing number of vertices and/or edges list.')
+    Args:
+        input (str): Input file path (.txt format)
+        starting_vert (int, optional): Source vertex key
+        verbose (bool, optional): Whether, or not, it should print the result
+
+    Returns:
+        list: Chosen edges with new values for 'value' and 'parent_key'
+
+    Raises:
+        FileNotFoundError: Raise when input file is not found
+    """
+    try:
+        vertices, edges = parse_file(input, verbose)
+    except FileNotFoundError as e:
+        raise e
 
     # Forest array used for avoiding cyclic trees
     forests = [i for i in range(len(vertices))]
@@ -18,8 +40,8 @@ def minimum_spanning_tree(input='', vertices=[], edges=[], verbose=True):
         print('#### SORTED EDGES ####', *sorted_edges, sep='\n')
 
     for edge in sorted_edges:
-        # If both vertices are not in the same forest
 
+        # If both vertices are not in the same forest
         if forests[edge.vert_pair[0].key] != forests[edge.vert_pair[1].key]:
 
             chosen_edges.append(edge)

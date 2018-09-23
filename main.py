@@ -1,3 +1,9 @@
+"""Interface class for Kruskal, Prim and Dijkstra algorithms.
+
+Dev: Caio Moraes
+GitHub: MoraesCaio
+Email: caiomoraes.cesar@gmail.com
+"""
 import argparse
 import kruskal
 import prim
@@ -5,6 +11,9 @@ import dijkstra
 
 
 def main():
+    """Usage example:
+        python main.py test_cases/simple_dij.txt -d
+    """
     argparser = argparse.ArgumentParser()
     argparser.add_argument('input', default='', help='Input file path.')
     argparser.add_argument('-k', '--kruskal', action='store_true', help='Run Kruskal\'s minimum spanning tree algorithm.')
