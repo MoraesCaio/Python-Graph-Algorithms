@@ -81,6 +81,43 @@ def search_vertex_edges(edges, vertex_key, excluded_verts=[]):
     return found
 
 
+def get_vertex_path(vertex_list, vertex):
+    """Generate a string representation for the vertex path obtained with Prim or Dijkstra algorithms.
+
+    Args:
+        vertex_list: list of vertex objects, each vertex must have the key for its parent vertex refered as parent_key. The parent vertex MUST be on the list.
+        vertex: a vertex object representing the last node of a path.
+
+    Returns:
+        string: string representation for the path containing the only its own vertices from the vertex_list. It's represented in the following format:
+            starting_vertex_key-other_vertex_key-(...)-last_vertex_key-
+    """
+
+    if vertex.parent_key == -1:
+        return f'{vertex.key}-'
+
+    for v in vertex_list:
+        if v.key == vertex.parent_key:
+            parent_vertex = v
+
+    return f'{get_vertex_path(vertex_list, parent_vertex)}{vertex.key}-'
+
+
+def print_vertex_tree(vertex_list):
+    """Prints the vertex tree obtained from Prim or Dijkstra algorithm in a user-friendly way.
+
+    Args:
+        vertex_list: list of vertex objects, each vertex must have the key for its parent vertex refered as parent_key. The parent vertex MUST be on the list.
+
+    Returns:
+        None
+    """
+    print('\n#### CHOSEN EDGES ####')
+
+    for vertex in vertex_list:
+        print(f'Vertex {vertex.key}\tPath (Sum={vertex.value}):\t{get_vertex_path(vertex_list, vertex)[:-1]}')
+
+
 # HEAP FUNCTIONS
 def _parent(i):
     """Get parent vertex index

@@ -56,6 +56,8 @@ def minimum_spanning_tree(input='', starting_vert=0, verbose=True):
 
     if verbose:
         print('\nForest array: ', forests, end='\n\n')
-        print('#### CHOSEN EDGES ####', *chosen_edges, sep='\n')
+        print('#### CHOSEN EDGES ####')
+        for e in chosen_edges:
+            print(f'Weight: {e.weight}  \tVertices: {e.vert_pair[0].key}-{e.vert_pair[1].key}')
 
     return chosen_edges

@@ -38,4 +38,4 @@ class Vertex:
         """
         value = 'MAX_VAL' if self.value == maxsize else self.value
         parent_key = 'NULL' if self.parent_key == -1 else self.parent_key
-        return f'{{{self.key}: val={value}, \t par_key={parent_key}}}'
+        return f'{{{self.key}: Value={value}, \t Parent Key={parent_key}}}'

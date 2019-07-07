@@ -33,7 +33,7 @@ class Edge:
         Returns:
             str: Formatted string
         """
-        return f'weight: {self.weight}  \tvertices: {self.vert_pair}'
+        return f'Weight: {self.weight}  \tVertices: {self.vert_pair}'
 
     def get_other_vertex_idx(self, vert):
         """Get the other vertex index using one of

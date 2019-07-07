@@ -9,6 +9,7 @@ Email: caiomoraes.cesar@gmail.com
 from utils import min_heapify
 from utils import parse_file
 from utils import search_vertex_edges
+from utils import print_vertex_tree
 
 
 def minimum_spanning_tree(input='', starting_vert=0, verbose=True):
@@ -54,6 +55,6 @@ def minimum_spanning_tree(input='', starting_vert=0, verbose=True):
                 other_vertex.value = edge.weight
 
     if verbose:
-        print('#### CHOSEN EDGES ####', *chosen_vertices, sep='\n')
+        print_vertex_tree(chosen_vertices)
 
     return chosen_vertices
